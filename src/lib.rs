@@ -2,9 +2,11 @@ use pyo3::prelude::*;
 
 mod algorithms;
 
-/// A Python module implemented in Rust.
+/// Python module implemented in Rust.
+/// Exposes selected Rust functions to Python.
 #[pymodule]
 fn _k_center(m: &Bound<'_, PyModule>) -> PyResult<()> {
-    m.add_function(wrap_pyfunction!(algorithms::gonzalez::gonzalez, m)?)?;
+    m.add_function(wrap_pyfunction!(algorithms::gonzalez::fit, m)?)?;
+    m.add_function(wrap_pyfunction!(algorithms::gonzalez::predict, m)?)?;
     Ok(())
 }
