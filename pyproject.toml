@@ -4,10 +4,22 @@ build-backend = "maturin"
 
 [project]
 name = "k-center"
+description = "Rust-accelerated implementations of the k-center (and k-supplier) problem."
+readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
+    "Intended Audience :: Science/Research",
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
+    "Operating System :: OS Independent",
 ]
 dynamic = ["version"]
+
+[project.urls]
+Homepage = "https://clustering-toolkit.algo.hhu.de/K-Center_Clustering"
+Repository = "https://github.com/algo-hhu/k-center"
+
+[tool.maturin]
+python-source = "python"
+module-name = "k_center._k_center"
