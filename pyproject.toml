@@ -23,3 +23,9 @@ Repository = "https://github.com/algo-hhu/k-center"
 [tool.maturin]
 python-source = "python"
 module-name = "k_center._k_center"
+
+[dependency-groups]
+dev = [
+    "maturin>=1.15,<2.0",
+    "pytest>=8.3.5",
+]
