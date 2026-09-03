@@ -5,14 +5,12 @@ Gonzalez algorithm.  Computations are done by the compiled ``gonzalez``
 Rust module, while this module provides a scikit-learn-compatible API.
 """
 
-import numpy as np
-
-from k_center import _k_center
-from numbers import Integral
 from typing import Optional, Sequence
+
+import numpy as np
+from k_center import _k_center
 from sklearn.base import BaseEstimator, ClusterMixin
 from sklearn.utils.validation import check_is_fitted, validate_data
-
 
 _DISTANCE_METRICS = ("euclidean", "manhattan", "chebyshev")
 
@@ -88,7 +86,9 @@ class KCenter(ClusterMixin, BaseEstimator):
         self.distance_metric = distance_metric
         self.random_state = random_state
 
-    def fit(self, X: Sequence[Sequence[float]], y: Optional[Sequence] = None) -> "KCenter":
+    def fit(
+        self, X: Sequence[Sequence[float]], y: Optional[Sequence] = None
+    ) -> "KCenter":
         """Run the Gonzalez algorithm on the given points.
 
         Selects ``n_clusters`` centers from the input points, assigns each
@@ -133,7 +133,9 @@ class KCenter(ClusterMixin, BaseEstimator):
         self.n_features_in_ = data.shape[1]
         return self
 
-    def fit_predict(self, X: Sequence[Sequence[float]], y: Optional[Sequence] = None) -> np.ndarray:
+    def fit_predict(
+        self, X: Sequence[Sequence[float]], y: Optional[Sequence] = None
+    ) -> np.ndarray:
         """Run the Gonzalez algorithm and return the label of each input point.
 
         Equivalent to calling :meth:`fit` and then reading the ``labels_``
@@ -208,7 +210,7 @@ class KCenter(ClusterMixin, BaseEstimator):
         """
         if self.algorithm != "gonzalez":
             raise ValueError("algorithm must be 'gonzalez'")
-        if not isinstance(self.n_clusters, Integral) or self.n_clusters < 1:
+        if self.n_clusters < 1:
             raise ValueError("n_clusters must be a positive integer")
         if self.distance_metric not in _DISTANCE_METRICS:
             raise ValueError(
@@ -220,9 +222,7 @@ class KCenter(ClusterMixin, BaseEstimator):
             raise ValueError("n_clusters cannot exceed the number of input points")
         return data
 
-    def _to_2d_array(
-        self, X: Sequence[Sequence[float]], *, reset: bool
-    ) -> np.ndarray:
+    def _to_2d_array(self, X: Sequence[Sequence[float]], *, reset: bool) -> np.ndarray:
         """Validate and convert input to a dense, finite, C-contiguous float64 array.
 
         Parameters

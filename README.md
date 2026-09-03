@@ -7,7 +7,7 @@ exposed to Python through [PyO3](https://pyo3.rs) and
 
 **Rust is only needed to build the project, not to use it.** The published
 PyPI wheel bundles the pre-compiled Rust code together with the Python
-package, so end users just run 
+package, so end users just run
 ```
 pip install k-center
 ```
@@ -22,7 +22,7 @@ its nearest center. This is an NP-hard problem in general, so the library
 provides approximation algorithms.
 
 Currently only the greedy Gonzalez algorithm is implemented
-(`algorithm="gonzalez"`). The Gonzalez algorithm runs in $\mathcal{O}(k n d)$ time for $n$ points with $d$ dimensions and guarantees a 2-approximation: the resulting objective radius is at most twice the optimal value. 
+(`algorithm="gonzalez"`). The Gonzalez algorithm runs in $\mathcal{O}(k n d)$ time for $n$ points with $d$ dimensions and guarantees a 2-approximation: the resulting objective radius is at most twice the optimal value.
 
 Supported distance metrics are `euclidean`, `manhattan`, and `chebyshev`.
 
@@ -115,5 +115,3 @@ dependencies live in `Cargo.toml` `[dependencies]`, while Python dev tools
 (maturin, pytest) live in the `[dependency-groups]` `dev` group of
 `pyproject.toml`. Runtime Python dependencies (e.g. numpy, scikit-learn) go
 into `[project] dependencies` and are only recorded in the wheel metadata.
-
-

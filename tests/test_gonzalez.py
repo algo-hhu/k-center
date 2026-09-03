@@ -1,6 +1,6 @@
 import unittest
-import numpy as np
 
+import numpy as np
 from k_center import KCenter
 
 
@@ -37,18 +37,14 @@ class GonzalezTests(unittest.TestCase):
         self.assertTrue(np.array_equal(predictions, np.array([0, 1])))
 
     def test_predict_uses_chebyshev_distance(self) -> None:
-        model = KCenter(
-            n_clusters=2, distance_metric="chebyshev", random_state=None
-        )
+        model = KCenter(n_clusters=2, distance_metric="chebyshev", random_state=None)
         model.fit([[0.0, 0.0], [10.0, 10.0], [10.0, 0.0]])
 
         predictions = model.predict([[9.0, 9.0], [0.0, 0.0]])
         self.assertTrue(np.array_equal(predictions, np.array([1, 0])))
 
     def test_predict_uses_manhattan_distance(self) -> None:
-        model = KCenter(
-            n_clusters=2, distance_metric="manhattan", random_state=None
-        )
+        model = KCenter(n_clusters=2, distance_metric="manhattan", random_state=None)
         model.fit([[0.0, 0.0], [10.0, 10.0], [10.0, 0.0]])
 
         predictions = model.predict([[9.0, 9.0], [0.0, 0.0]])
@@ -82,9 +78,7 @@ class GonzalezTests(unittest.TestCase):
         second = KCenter(n_clusters=2, random_state=42)
         second.fit([[0.0], [10.0], [11.0]])
 
-        self.assertTrue(
-            np.array_equal(first.center_indices_, second.center_indices_)
-        )
+        self.assertTrue(np.array_equal(first.center_indices_, second.center_indices_))
         self.assertAlmostEqual(first.objective_radius_, second.objective_radius_)
 
     def test_validation_rejects_invalid_cluster_count(self) -> None:
