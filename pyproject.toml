@@ -5,7 +5,11 @@ build-backend = "maturin"
 [project]
 name = "k-center"
 description = "Rust-accelerated implementations of the k-center (and k-supplier) problem."
+authors = [
+    { name = "Sophia Voelker", email = "sophia.voelker@hhu.de"},
+]
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.8"
 classifiers = [
     "Intended Audience :: Science/Research",
