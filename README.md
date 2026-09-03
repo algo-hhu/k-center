@@ -71,7 +71,7 @@ model.predict([[5.0, 5.0]])
 ### Prerequisites
 
 - Rust toolchain (`cargo`), e.g. via [rustup](https://rustup.rs)
-- Python 3.8+
+- Python 3.11+
 - [uv](https://docs.astral.sh/uv/) (for the Python dev environment)
 
 ### Setup

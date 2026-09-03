@@ -10,12 +10,11 @@ authors = [
 ]
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 classifiers = [
     "Intended Audience :: Science/Research",
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy",
     "Operating System :: OS Independent",
 ]
 dynamic = ["version"]
@@ -37,4 +36,7 @@ dev = [
     "maturin>=1.15,<2.0",
     "pre-commit>=3.5.0",
     "pytest>=8.3.5",
+    "mypy==1.10.0",
+    "flake8==7.0.0",
+    "flake8-bugbear==21.4.3",
 ]

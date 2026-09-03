@@ -1,0 +1,60 @@
+name: QA and Tests
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "python/k_center/**"
+      - "tests/**"
+      - "src/**"
+      - "Cargo.toml"
+      - "pyproject.toml"
+      - "uv.lock"
+  pull_request:
+    paths:
+      - "python/k_center/**"
+      - "tests/**"
+      - "src/**"
+      - "Cargo.toml"
+      - "pyproject.toml"
+      - "uv.lock"
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v7
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Run MyPy
+        run: uv run mypy --install-types --non-interactive python/k_center tests
+        env:
+          MYPYPATH: python
+
+      - name: Run Flake8
+        run: uv run flake8 python/k_center/ tests/
+
+      - name: Run Python Tests
+        run: uv run pytest tests/ -v
+
+      - name: Run Rust Tests
+        run: cargo test
