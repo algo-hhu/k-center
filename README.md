@@ -54,7 +54,9 @@ model.predict([[5.0, 5.0]])
 
 ```
 ├── Cargo.toml          # Rust crate (compiled to k_center._k_center)
+│                       #   also the single source of truth for the package version
 ├── pyproject.toml      # Python package metadata + maturin config
+│                       #   (`dynamic = ["version"]` pulls the version from Cargo.toml)
 ├── src/                # Rust source
 │   ├── lib.rs          # crate root; registers the Python module
 │   └── algorithms/     # per-algorithm Rust modules
