@@ -5,7 +5,7 @@ Gonzalez algorithm.  Computations are done by the compiled ``gonzalez``
 Rust module, while this module provides a scikit-learn-compatible API.
 """
 
-from typing import Optional, Sequence
+from typing import Optional, Sequence, cast
 
 import numpy as np
 from k_center import _k_center
@@ -85,6 +85,12 @@ class KCenter(ClusterMixin, BaseEstimator):
         self.n_clusters = n_clusters
         self.distance_metric = distance_metric
         self.random_state = random_state
+        self.objective_radius_: float
+        self.labels_: np.ndarray
+        self.cluster_centers_: np.ndarray
+        self.cluster_radii_: np.ndarray
+        self.center_indices_: np.ndarray
+        self.n_features_in_: int
 
     def fit(
         self, X: Sequence[Sequence[float]], y: Optional[Sequence] = None
@@ -235,7 +241,7 @@ class KCenter(ClusterMixin, BaseEstimator):
             attribute.  If False (e.g. from :meth:`predict`), check that the
             number of features is consistent with ``n_features_in_``.
         """
-        return np.ascontiguousarray(
+        data = np.ascontiguousarray(
             validate_data(
                 self,
                 X,
@@ -246,3 +252,4 @@ class KCenter(ClusterMixin, BaseEstimator):
                 reset=reset,
             )
         )
+        return cast(np.ndarray, data)
