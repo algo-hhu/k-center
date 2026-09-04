@@ -19,16 +19,19 @@ jobs:
         include:
           - os: ubuntu-latest
             target: x86_64
-            args: "--manylinux auto"
+            manylinux: "2_28"
           - os: ubuntu-latest
             target: aarch64
-            args: "--manylinux auto"
+            manylinux: "2_28"
           - os: macos-latest
-            target: macos
-            args: ""
+            target: universal2-apple-darwin
+            manylinux: ""
           - os: windows-latest
             target: x86_64
-            args: ""
+            manylinux: ""
+          - os: windows-11-arm
+            target: aarch64
+            manylinux: ""
 
     steps:
       - uses: actions/checkout@v6
@@ -42,7 +45,8 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: ${{ matrix.target }}
-          args: --release --strip ${{ matrix.args }}
+          manylinux: ${{ matrix.manylinux }}
+          args: --release --locked --compatibility pypi
 
       - name: Upload wheel
         uses: actions/upload-artifact@v4
