@@ -5,9 +5,9 @@ exposed to Python through [PyO3](https://pyo3.rs) and
 [maturin](https://maturin.rs).
 
 
-**Rust is only needed to build the project, not to use it.** The published
+Rust is not required for normal installation on supported Linux systems. The published
 PyPI wheel bundles the pre-compiled Rust code together with the Python
-package, so end users just run
+package, so users on compatible Linux systems can simply run:
 ```
 pip install k-center
 ```

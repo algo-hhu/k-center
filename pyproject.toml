@@ -15,7 +15,6 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
-    "Operating System :: OS Independent",
 ]
 dynamic = ["version"]
 dependencies = [
@@ -30,6 +29,8 @@ Repository = "https://github.com/algo-hhu/k-center"
 [tool.maturin]
 python-source = "python"
 module-name = "k_center._k_center"
+compatibility = "pypi"
+strip = true
 
 [dependency-groups]
 dev = [
