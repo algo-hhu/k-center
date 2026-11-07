@@ -47,7 +47,8 @@ jobs:
     if: github.event_name == 'release'
     needs: build
     runs-on: ubuntu-latest
-
+    permissions:
+      id-token: write
     steps:
       - name: Download distributions
         uses: actions/download-artifact@v8
@@ -58,6 +59,4 @@ jobs:
       - uses: astral-sh/setup-uv@v10.0.1
 
       - name: Publish to PyPI
-        env:
-          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
         run: uv publish dist/*
